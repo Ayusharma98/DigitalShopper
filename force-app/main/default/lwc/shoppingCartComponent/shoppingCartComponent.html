@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Shopping Cart">
+        <template if:true={cartItems}>
+            <ul>
+                <template for:each={cartItems} for:item="item">
+                    <li key={item.Id}>
+                        Product ID: {item.Product_ID__c} 
+                        Quantity: 
+                        <lightning-input type="number" value={item.Quantity__c} data-id={item.Product_ID__c} onchange={handleQuantityChange}></lightning-input>
+                    </li>
+                </template>
+            </ul>
+            <lightning-button variant="brand" label="Checkout" onclick={handleCheckout}></lightning-button>
+        </template>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title="Address Management">
+        <lightning-input label="Address Line 1" value={addressLine1} onchange={handleAddressLine1Change}></lightning-input>
+        <lightning-input label="City" value={city} onchange={handleCityChange}></lightning-input>
+        <lightning-input label="State" value={state} onchange={handleStateChange}></lightning-input>
+        <lightning-input label="Zip Code" value={zipCode} onchange={handleZipCodeChange}></lightning-input>
+        <lightning-button label="Save Address" onclick={saveAddress}></lightning-button>
+    </lightning-card>
+</template>

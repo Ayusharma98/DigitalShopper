@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Welcome to Our Store" icon-name="custom:custom14">
+        <div class="slds-p-horizontal_small">
+            <lightning-carousel>
+                <lightning-carousel-image src={productImage1} alternative-text="Product Image 1" header="Featured Product 1"></lightning-carousel-image>
+                <lightning-carousel-image src={productImage2} alternative-text="Product Image 2" header="Featured Product 2"></lightning-carousel-image>
+            </lightning-carousel>
+        </div>
+        <lightning-button variant="brand" label="Shop Now" onclick={handleShopNowClick}></lightning-button>
+        <template if:true={products}>
+            <h2>Featured Products</h2>
+            <ul class="product-list">
+                <template for:each={products} for:item="product">
+                    <li key={product.id}>
+                        <lightning-card title={product.name} icon-name="custom:custom63">
+                            <p>{product.price}</p>
+                            <lightning-button variant="neutral" label="View Product" onclick={handleViewProduct}></lightning-button>
+                        </lightning-card>
+                    </li>
+                </template>
+            </ul>
+        </template>
+    </lightning-card>
+</template>

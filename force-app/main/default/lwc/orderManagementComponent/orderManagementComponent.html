@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Order History">
+        <template if:true={orders}>
+            <ul>
+                <template for:each={orders} for:item="order">
+                    <li key={order.Id}>
+                        Order ID: {order.Id} - Total: ${order.TotalAmount} - Status: {order.Status}
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template if:false={orders}>
+            <p>No orders found.</p>
+        </template>
+    </lightning-card>
+</template>

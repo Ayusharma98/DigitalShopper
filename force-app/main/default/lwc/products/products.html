@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="Product Search">
+        <lightning-input 
+            label="Search for Products" 
+            value={searchTerm} 
+            onchange={handleSearchTermChange} 
+            placeholder="Enter product name or description"
+            onkeyup={handleKeyUp}>
+        </lightning-input>
+
+        <template if:true={products.length}>
+            <ul class="product-list">
+                <template for:each={products} for:item="product">
+                    <li key={product.Id} class="product-item">
+                        <img src={product.Image_URL__c} alt={product.Name} class="product-image" />
+                        <div class="product-info">
+                            <strong>{product.Name}</strong>
+                            <p>{product.Description}</p>
+                            <p>Price: ${product.Price__c}</p>
+                            <p>Category: {product.Category__c}</p>
+                            <p>Stock: {product.Stock_Quantity__c}</p>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </template>
+        
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner>
+        </template>
+
+        <template if:true={noResults}>
+            <p>No products found.</p>
+        </template>
+    </lightning-card>
+</template>
