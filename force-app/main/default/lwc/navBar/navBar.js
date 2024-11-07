@@ -14,21 +14,18 @@ export default class Navbar extends NavigationMixin(LightningElement) {
 
     navigateToAccount() {
         this[NavigationMixin.Navigate]({
-            type: 'standard__objectPage',
+            type: 'standard__webPage',
             attributes: {
-                objectApiName: 'Account',
-                actionName: 'list' 
+                url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/account-details' 
             }
         });
     }
 
     navigateToContacts() {
         this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
+            type: 'standard__webPage',
             attributes: {
-                recordId: '003', 
-                objectApiName: 'Contact',
-                actionName: 'view'
+                url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/contacts' 
             }
         });
     }
@@ -44,10 +41,9 @@ export default class Navbar extends NavigationMixin(LightningElement) {
 
     navigateToOrders() {
         this[NavigationMixin.Navigate]({
-            type: 'standard__objectPage',
+            type: 'standard__webPage',
             attributes: {
-                objectApiName: 'Order',
-                actionName: 'list'
+                url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/orders'
             }
         });
     }
@@ -56,7 +52,7 @@ export default class Navbar extends NavigationMixin(LightningElement) {
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: {
-                url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/login-page' // Adjust this to the correct relative path for your login page
+                url: 'login-page' // Adjust this to the correct relative path for your login page
             }
         });
         console.log('Login button clicked');

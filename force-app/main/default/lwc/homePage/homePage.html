@@ -7,6 +7,7 @@
             </lightning-carousel>
         </div>
         <lightning-button variant="brand" label="Shop Now" onclick={handleShopNowClick}></lightning-button>
+
         <template if:true={products}>
             <h2>Featured Products</h2>
             <ul class="product-list">
@@ -14,7 +15,21 @@
                     <li key={product.id}>
                         <lightning-card title={product.name} icon-name="custom:custom63">
                             <p>{product.price}</p>
-                            <lightning-button variant="neutral" label="View Product" onclick={handleViewProduct}></lightning-button>
+
+                            <!-- Add to Cart and Buy Now buttons -->
+                            <lightning-button 
+                                variant="neutral" 
+                                label="Add to Cart" 
+                                onclick={handleAddToCart} 
+                                data-id={product.id}>
+                            </lightning-button>
+
+                            <lightning-button 
+                                variant="brand" 
+                                label="Buy Now" 
+                                onclick={handleBuyNow} 
+                                data-id={product.id}>
+                            </lightning-button>
                         </lightning-card>
                     </li>
                 </template>

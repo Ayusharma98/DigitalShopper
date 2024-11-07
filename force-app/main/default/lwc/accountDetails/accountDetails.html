@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Account Details" icon-name="standard:account">
+        <template if:true={account}>
+            <div class="slds-p-around_medium">
+                <lightning-layout horizontal-align="spread">
+                    <lightning-layout-item>
+                        <strong>Name:</strong> {account.Name}
+                    </lightning-layout-item>
+                    <lightning-layout-item>
+                        <strong>Email:</strong> {account.PersonEmail}
+                    </lightning-layout-item>
+                    <lightning-layout-item>
+                        <strong>Phone:</strong> {account.Phone}
+                    </lightning-layout-item>
+                </lightning-layout>
+
+                <lightning-layout horizontal-align="start">
+                    <lightning-layout-item>
+                        <strong>Billing Address:</strong>
+                        <p>
+                            {account.BillingStreet}<br/>
+                            {account.BillingCity}, {account.BillingState} {account.BillingPostalCode}<br/>
+                            {account.BillingCountry}
+                        </p>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </template>
+        <template if:true={error}>
+            <div class="slds-p-around_medium">
+                <p>Error retrieving account data: {error}</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

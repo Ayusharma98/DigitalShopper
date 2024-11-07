@@ -1,9 +1,34 @@
 <template>
     <lightning-card title="Address Management">
-        <lightning-input label="Address Line 1" value={addressLine1} onchange={handleAddressLine1Change}></lightning-input>
-        <lightning-input label="City" value={city} onchange={handleCityChange}></lightning-input>
-        <lightning-input label="State" value={state} onchange={handleStateChange}></lightning-input>
-        <lightning-input label="Zip Code" value={zipCode} onchange={handleZipCodeChange}></lightning-input>
-        <lightning-button label="Save Address" onclick={saveAddress}></lightning-button>
+        <div class="slds-p-around_medium">
+            <!-- Billing Address Fields -->
+            <lightning-input label="Billing Street" value={billingStreet} onchange={handleBillingStreetChange}></lightning-input>
+            <lightning-input label="Billing City" value={billingCity} onchange={handleBillingCityChange}></lightning-input>
+            <lightning-input label="Billing State/Province" value={billingState} onchange={handleBillingStateChange}></lightning-input>
+            <lightning-input label="Billing Zip/Postal Code" value={billingZipCode} onchange={handleBillingZipCodeChange}></lightning-input>
+            <lightning-input label="Billing Country" value={billingCountry} onchange={handleBillingCountryChange}></lightning-input>
+
+            <!-- Shipping Address Fields -->
+            <lightning-input label="Shipping Street" value={shippingStreet} onchange={handleShippingStreetChange}></lightning-input>
+            <lightning-input label="Shipping City" value={shippingCity} onchange={handleShippingCityChange}></lightning-input>
+            <lightning-input label="Shipping State/Province" value={shippingState} onchange={handleShippingStateChange}></lightning-input>
+            <lightning-input label="Shipping Zip/Postal Code" value={shippingZipCode} onchange={handleShippingZipCodeChange}></lightning-input>
+            <lightning-input label="Shipping Country" value={shippingCountry} onchange={handleShippingCountryChange}></lightning-input>
+
+            <!-- Save Button -->
+            <lightning-button variant="brand" label="Save Address" onclick={saveAddress}></lightning-button>
+
+            <!-- Display Updated Account Address Details -->
+            <template if:true={account.Id}>
+                <p><strong>Account Name:</strong> {account.Name}</p>
+                <p><strong>Billing Address:</strong> {account.BillingStreet}, {account.BillingCity}, {account.BillingState}, {account.BillingPostalCode}, {account.BillingCountry}</p>
+                <p><strong>Shipping Address:</strong> {account.ShippingStreet}, {account.ShippingCity}, {account.ShippingState}, {account.ShippingPostalCode}, {account.ShippingCountry}</p>
+            </template>
+
+            <!-- Display Error Message -->
+            <template if:true={errorMessage}>
+                <p style="color: red;">{errorMessage}</p>
+            </template>
+        </div>
     </lightning-card>
 </template>

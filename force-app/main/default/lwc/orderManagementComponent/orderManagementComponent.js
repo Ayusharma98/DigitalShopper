@@ -1,5 +1,5 @@
 import { LightningElement, track } from 'lwc';
-import getUserOrders from '@salesforce/apex/OrderController.getUserOrders';
+import getUserOrders from '@salesforce/apex/OrderController.createOrder';
 
 export default class OrderHistory extends LightningElement {
     @track orders = [];
