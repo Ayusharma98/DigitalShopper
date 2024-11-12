@@ -1,6 +1,5 @@
 <template>
     <lightning-card title="Checkout" icon-name="custom:custom63">
-        <!-- Address Form -->
         <lightning-layout class="slds-p-around_medium">
             <lightning-layout-item size="12">
                 <lightning-input label="Full Name" value={fullName} onchange={handleInputChange} data-id="fullName" required></lightning-input>
@@ -22,7 +21,6 @@
             </lightning-layout-item>
         </lightning-layout>
 
-        <!-- Payment Form (Stripe) -->
         <div class="slds-p-around_medium">
             <h3>Payment Information</h3>
             <lightning-input label="Cardholder's Name" value={cardholderName} onchange={handleInputChange} data-id="cardholderName" required></lightning-input>
@@ -31,7 +29,6 @@
             <lightning-input label="CVC" value={cvc} onchange={handleInputChange} data-id="cvc" required></lightning-input>
         </div>
 
-        <!-- Checkout Button -->
         <lightning-button variant="brand" label="Complete Purchase" onclick={handleCheckout}></lightning-button>
     </lightning-card>
 </template>

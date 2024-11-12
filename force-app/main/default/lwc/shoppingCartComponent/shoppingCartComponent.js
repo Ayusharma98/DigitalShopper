@@ -24,7 +24,6 @@ export default class ShoppingCart extends LightningElement {
 
         updateCart({ productId, quantity })
             .then(() => {
-                // Optionally refresh cart items
                 return getCartItems();
             })
             .then((data) => {
@@ -38,7 +37,6 @@ export default class ShoppingCart extends LightningElement {
     handleCheckout() {
         checkout()
             .then(() => {
-                // Clear cart items after checkout
                 this.cartItems = [];
                 alert('Checkout successful!');
             })

@@ -1,15 +1,24 @@
 <template>
-    <lightning-card title="Create Your Account" icon-name="utility:person">
-        <div class="slds-m-around_medium">
-            <lightning-input label="First Name" value={firstName} onchange={handleChange} data-field="firstName"></lightning-input>
-            <lightning-input label="Last Name" value={lastName} onchange={handleChange} data-field="lastName"></lightning-input>
-            <lightning-input type="email" label="Email" value={email} onchange={handleChange} data-field="email"></lightning-input>
-            <lightning-input type="password" label="Password" value={password} onchange={handleChange} data-field="password"></lightning-input>
-            <lightning-input type="password" label="Confirm Password" value={confirmPassword} onchange={handleChange} data-field="confirmPassword"></lightning-input>
-            <lightning-button variant="brand" label="Register" onclick={handleSubmit}></lightning-button>
+    <lightning-card title="User Registration">
+        <div class="slds-p-around_medium">
+            <form class="form-container" onsubmit={handleSubmit}>
+                <lightning-input class="form-field" label="First Name" value={firstName} onchange={handleInputChange} data-id="firstName" required></lightning-input>
+                <lightning-input class="form-field" label="Last Name" value={lastName} onchange={handleInputChange} data-id="lastName" required></lightning-input>
+                <lightning-input class="form-field" label="Email" value={email} onchange={handleInputChange} data-id="email"></lightning-input>
+                <lightning-input class="form-field" label="Username" value={username} onchange={handleInputChange} data-id="username"></lightning-input>
+                <lightning-input class="form-field" label="Password" type="password" value={password} onchange={handleInputChange} data-id="password" required></lightning-input>
+                <lightning-input class="form-field" label="Address Line 1" value={addressLine1} onchange={handleInputChange} data-id="addressLine1"></lightning-input>
+                <lightning-input class="form-field" label="Address Line 2" value={addressLine2} onchange={handleInputChange} data-id="addressLine2"></lightning-input>
+                <lightning-input class="form-field" label="City" value={city} onchange={handleInputChange} data-id="city"></lightning-input>
+                <lightning-input class="form-field" label="State" value={state} onchange={handleInputChange} data-id="state"></lightning-input>
+                <lightning-input class="form-field" label="Zip Code" value={zipCode} onchange={handleInputChange} data-id="zipCode"></lightning-input>
+                
+                <lightning-button class="form-button" variant="brand" label="Register" onclick={handleRegister}></lightning-button>
+            </form>
+
+            <div class="redirect-button">
+                <lightning-button variant="neutral" label="Already have an account? Login here" onclick={handleRedirectToLogin}></lightning-button>
+            </div>
         </div>
-        <template if:true={errorMessage}>
-            <div class="slds-text-color_error">{errorMessage}</div>
-        </template>
     </lightning-card>
 </template>

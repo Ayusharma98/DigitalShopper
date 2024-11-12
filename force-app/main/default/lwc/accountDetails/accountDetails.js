@@ -1,7 +1,6 @@
 import { LightningElement, wire, api } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
 
-// Define the fields you want to retrieve
 const FIELDS = [
     'Account.Name',
     'Account.PersonEmail',
@@ -14,9 +13,8 @@ const FIELDS = [
 ];
 
 export default class AccountDetails extends LightningElement {
-    @api recordId; // To receive the Account record Id as a property
+    @api recordId; 
 
-    // Wire service to get the Account data
     @wire(getRecord, { recordId: '$recordId', fields: FIELDS })
     accountData({ error, data }) {
         if (data) {

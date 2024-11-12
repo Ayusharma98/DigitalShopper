@@ -2,7 +2,6 @@ import { LightningElement, track } from 'lwc';
 import saveAddress from '@salesforce/apex/AddressController.saveAddress';
 
 export default class AddressManagement extends LightningElement {
-    // Track form fields for Billing and Shipping Address
     @track billingStreet = '';
     @track billingCity = '';
     @track billingState = '';
@@ -15,24 +14,21 @@ export default class AddressManagement extends LightningElement {
     @track shippingZipCode = '';
     @track shippingCountry = '';
 
-    @track account = {};  // To store the updated Account details
-    @track errorMessage;  // To store error messages
+    @track account = {}; 
+    @track errorMessage; 
 
-    // Billing Address Change Handlers
     handleBillingStreetChange(event) { this.billingStreet = event.target.value; }
     handleBillingCityChange(event) { this.billingCity = event.target.value; }
     handleBillingStateChange(event) { this.billingState = event.target.value; }
     handleBillingZipCodeChange(event) { this.billingZipCode = event.target.value; }
     handleBillingCountryChange(event) { this.billingCountry = event.target.value; }
 
-    // Shipping Address Change Handlers
     handleShippingStreetChange(event) { this.shippingStreet = event.target.value; }
     handleShippingCityChange(event) { this.shippingCity = event.target.value; }
     handleShippingStateChange(event) { this.shippingState = event.target.value; }
     handleShippingZipCodeChange(event) { this.shippingZipCode = event.target.value; }
     handleShippingCountryChange(event) { this.shippingCountry = event.target.value; }
 
-    // Save Address Method (call Apex)
     saveAddress() {
         saveAddress({
             billingStreet: this.billingStreet,
@@ -47,11 +43,11 @@ export default class AddressManagement extends LightningElement {
             shippingCountry: this.shippingCountry
         })
         .then(result => {
-            this.account = result; // Update account with new address data
-            this.errorMessage = undefined; // Clear previous errors
+            this.account = result; 
+            this.errorMessage = undefined; 
         })
         .catch(error => {
-            this.errorMessage = 'Error: ' + error.body.message; // Display error message
+            this.errorMessage = 'Error: ' + error.body.message; 
             console.error(error);
         });
     }

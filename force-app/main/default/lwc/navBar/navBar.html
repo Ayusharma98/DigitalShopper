@@ -1,19 +1,23 @@
 <template>
-   
     <nav class="slds-navbar slds-theme_default">
         <div class="slds-navbar__header">
             <div class="slds-navbar__item slds-grid slds-grid_align-spread">
                 <h1 class="slds-text-heading_medium">Digital Shopper</h1>
-                <lightning-button variant="base" label="Home" onclick={navigateToHome}></lightning-button>
-                    <lightning-button variant="base" label="Account" onclick={navigateToAccount}></lightning-button>
-                    <lightning-button variant="base" label="Contacts" onclick={navigateToContacts}></lightning-button>
-                    <lightning-button variant="base" label="Products" onclick={navigateToProducts}></lightning-button>
-                    <lightning-button variant="base" label="Orders" onclick={navigateToOrders}></lightning-button>
+                <lightning-button variant="base" label="Home" onclick={navigateToHome} target="_self"></lightning-button>
+                <lightning-button variant="base" label="Account" onclick={navigateToAccount} target="_self"></lightning-button>
+                <lightning-button variant="base" label="Contacts" onclick={navigateToContacts} target="_self"></lightning-button>
+                <lightning-button variant="base" label="Products" onclick={navigateToProducts} target="_self"></lightning-button>
+                <lightning-button variant="base" label="Orders" onclick={navigateToOrders} target="_self"></lightning-button>
+                
                 <div class="slds-button-group">
-                    <lightning-button variant="brand" label="Login" onclick={navigateToLogin}></lightning-button>
+                    <template if:true={isLoggedIn}>
+                        <lightning-button variant="base" label={userInitials} onclick={handleLogout}></lightning-button>
+                    </template>
+                    <template if:false={isLoggedIn}>
+                        <lightning-button variant="brand" label="Login" onclick={navigateToLogin}></lightning-button>
+                    </template>
                 </div>
             </div>
         </div>
     </nav>
-
 </template>

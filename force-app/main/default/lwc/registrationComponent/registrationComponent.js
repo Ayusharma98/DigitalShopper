@@ -1,45 +1,58 @@
-import { LightningElement, track } from 'lwc';
-import userRegistration from '@salesforce/apex/RegistartionController.userRegistration';
+import { LightningElement } from 'lwc';
+import registerUser from '@salesforce/apex/UserAuthController.registerUser';
+import { NavigationMixin } from 'lightning/navigation';
 
-export default class RegistartionController extends LightningElement {
-    @track firstName = '';
-    @track lastName = '';
-    @track email = '';
-    @track password = '';
-    @track confirmPassword = '';
-    @track errorMessage = '';
+export default class UserRegistration extends NavigationMixin(LightningElement) {
+    firstName = '';
+    lastName = '';
+    email = '';
+    username = '';
+    password = '';
+    addressLine1 = '';
+    addressLine2 = '';
+    city = '';
+    state = '';
+    zipCode = '';
 
-    handleChange(event) {
-        const field = event.target.dataset.field;
-        if (field === 'firstName') this.firstName = event.target.value;
-        else if (field === 'lastName') this.lastName = event.target.value;
-        else if (field === 'email') this.email = event.target.value;
-        else if (field === 'password') this.password = event.target.value;
-        else if (field === 'confirmPassword') this.confirmPassword = event.target.value;
+    handleInputChange(event) {
+        const field = event.target.dataset.id;
+        this[field] = event.target.value;
     }
 
-    async handleSubmit() {
-        this.errorMessage = '';
-        if (this.password !== this.confirmPassword) {
-            this.errorMessage = 'Passwords do not match.';
+    handleRegister(event) {
+        event.preventDefault(); 
+
+        if (!this.firstName || !this.lastName || !this.password) {
+            alert('Please fill out all required fields.');
             return;
         }
-        try {
-            await userRegistration({
-                firstName: this.firstName,
-                lastName: this.lastName,
-                email: this.email,
-                password: this.password,
-            });
-            console.log('User registered successfully');
-            this.firstName = '';
-            this.lastName = '';
-            this.email = '';
-            this.password = '';
-            this.confirmPassword = '';
-        } catch (error) {
-            this.errorMessage = error.body.message; 
-            console.error('Error during registration:', error);
-        }
+
+        registerUser({
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            username: this.username,
+            password: this.password,
+            addressLine1: this.addressLine1,
+            addressLine2: this.addressLine2,
+            city: this.city,
+            state: this.state,
+            zipCode: this.zipCode
+        })
+        .then(result => {
+            alert(result);
+        })
+        .catch(error => {
+            alert('Error: ' + error.body.message);
+        });
+    }
+
+    handleRedirectToLogin() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: '/login-page'
+            }
+        });
     }
 }

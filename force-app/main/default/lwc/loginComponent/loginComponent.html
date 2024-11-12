@@ -1,34 +1,14 @@
 <template>
-    <!-- Login Form -->
-    <lightning-card title="Login" icon-name="standard:user">
-        <div class="slds-p-horizontal_medium">
-            <lightning-input label="Email" value={email} data-field="email" onchange={handleChange} type="email"></lightning-input>
-            <lightning-input label="Password" value={password} data-field="password" onchange={handleChange} type="password"></lightning-input>
-
-            <lightning-button variant="brand" label="Login" onclick={handleSubmit}></lightning-button>
-
-            <template if:true={errorMessage}>
-                <p class="slds-text-color_error">{errorMessage}</p>
-            </template>
-
-            <div class="slds-m-top_medium">
-                <!-- Forgot Password Link -->
-                <lightning-button variant="base" label="Forgot Password?" onclick={handleForgotPassword}></lightning-button>
-
-                <!-- Don't have an account link -->
-                <lightning-button variant="base" label="Don't have an account?" onclick={handleSignUp}></lightning-button>
-            </div>
+    <lightning-card title="User Login">
+        <div class="slds-p-around_medium">
+            <lightning-input label="Username" value={username} onchange={handleInputChange} data-id="username"></lightning-input>
+            <lightning-input label="Password" type="password" value={password} onchange={handleInputChange} data-id="password"></lightning-input>
+            
+            <lightning-button-stateful variant="brand" label="Login" onclick={handleLogin}></lightning-button-stateful>
+            <br>
+            <lightning-button-stateful variant="neutral" label="Forgot Password?" onclick={handleForgotPassword}></lightning-button-stateful>
+            
+            <lightning-button variant="neutral" label="Don't have an account? Register here" onclick={handleRedirectToRegister}></lightning-button>
         </div>
     </lightning-card>
-
-    <!-- Forgot Password Form -->
-    <template if:true={isForgotPassword}>
-        <lightning-card title="Reset Password" icon-name="standard:password">
-            <div class="slds-p-horizontal_medium">
-                <lightning-input label="Enter your email" value={forgotEmail} onchange={handleForgotEmailChange} type="email"></lightning-input>
-                <lightning-button variant="brand" label="Reset Password" onclick={forgotPassword}></lightning-button>
-                <lightning-button variant="neutral" label="Cancel" onclick={cancelForgotPassword}></lightning-button>
-            </div>
-        </lightning-card>
-    </template>
 </template>

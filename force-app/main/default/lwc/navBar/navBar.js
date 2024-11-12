@@ -1,13 +1,35 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 
 export default class Navbar extends NavigationMixin(LightningElement) {
 
+    @track isLoggedIn = false;
+    @track userInitials = ''; 
+
+    loginUser() {
+        this.isLoggedIn = true;
+        const userName = "John Doe";
+        this.userInitials = this.getUserInitials(userName);
+    }
+
+    getUserInitials(fullName) {
+        const nameParts = fullName.split(' ');
+        const initials = nameParts.map(name => name.charAt(0).toUpperCase()).join('');
+        return initials;
+    }
+
+    handleLogout() {
+        this.isLoggedIn = false;
+        this.userInitials = '';
+        console.log('User logged out');
+    }
+
     navigateToHome() {
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
+            target: '_self',
             attributes: {
-                url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/homepage' // Adjust the URL as needed
+                url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/homepage'
             }
         });
     }
@@ -15,8 +37,9 @@ export default class Navbar extends NavigationMixin(LightningElement) {
     navigateToAccount() {
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
+            target: '_self',
             attributes: {
-                url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/account-details' 
+                url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/account-details'
             }
         });
     }
@@ -24,8 +47,9 @@ export default class Navbar extends NavigationMixin(LightningElement) {
     navigateToContacts() {
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
+            target: '_self',
             attributes: {
-                url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/contacts' 
+                url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/contacts'
             }
         });
     }
@@ -33,6 +57,7 @@ export default class Navbar extends NavigationMixin(LightningElement) {
     navigateToProducts() {
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
+            target: '_self',
             attributes: {
                 url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/product-details'
             }
@@ -42,6 +67,7 @@ export default class Navbar extends NavigationMixin(LightningElement) {
     navigateToOrders() {
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
+            target: '_self',
             attributes: {
                 url: 'https://psagitpvtltd2-dev-ed.develop.preview.salesforce-experience.com/Ds/orders'
             }
@@ -51,12 +77,14 @@ export default class Navbar extends NavigationMixin(LightningElement) {
     navigateToLogin() {
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
+            target: '_self',
             attributes: {
-                url: 'login-page' // Adjust this to the correct relative path for your login page
+                url: 'login-page' 
             }
         });
         console.log('Login button clicked');
     }
+    
     handleSearch(event) {
         const searchTerm = event.target.value.toLowerCase();
 
@@ -66,5 +94,4 @@ export default class Navbar extends NavigationMixin(LightningElement) {
 
         console.log('Filtered Products:', this.filteredProducts);
     }
-    
 }

@@ -11,10 +11,7 @@
 
                 <div class="slds-button-group">
                     <template if:true={isLoggedIn}>
-                        <lightning-button-stateful variant="base" label={userInitials} onclick={handleLogout}></lightning-button-stateful>
-                    </template>
-                    <template if:false={isLoggedIn}>
-                        <lightning-button-stateful variant="brand" label="Login" onclick={navigateToLogin}></lightning-button-stateful>
+                        <lightning-button variant="base" label={userInitials} onclick={navigateToAccount}></lightning-button>
                     </template>
                 </div>
             </div>
@@ -24,16 +21,8 @@
     <lightning-card title="Welcome to Our Store" icon-name="custom:custom14">
         <div class="slds-p-horizontal_small">
             <lightning-carousel>
-                <lightning-carousel-image src={productImage1} 
-                header="Featured Product 1"
-                description="Camera"
-                alternative-text="Product Image 1"
-                href="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg"></lightning-carousel-image>
-                <lightning-carousel-image src={productImage2}
-                header="Featured Product 2"
-                description="HeadPhone"
-                alternative-text="Product Image 2"
-                href="https://www.intex.in/cdn/shop/products/1_1545c94e-b9a0-439e-a95b-dcce076080bf_1024x1024.png"></lightning-carousel-image>
+                <lightning-carousel-image src={productImage1} alternative-text="Product Image 1" header="Featured Product 1"></lightning-carousel-image>
+                <lightning-carousel-image src={productImage2} alternative-text="Product Image 2" header="Featured Product 2"></lightning-carousel-image>
             </lightning-carousel>
         </div>
         <lightning-button variant="brand" label="Shop Now" onclick={handleShopNowClick}></lightning-button>
