@@ -4,18 +4,12 @@
             <div class="slds-navbar__item slds-grid slds-grid_align-spread">
                 <h1 class="slds-text-heading_medium">Digital Shopper</h1>
                 <lightning-button variant="base" label="Home" onclick={navigateToHome}></lightning-button>
-                <lightning-button variant="base" label="Account" onclick={navigateToAccount}></lightning-button>
-                <lightning-button variant="base" label="Contacts" onclick={navigateToContacts}></lightning-button>
                 <lightning-button variant="base" label="Products" onclick={navigateToProducts}></lightning-button>
-                <lightning-button variant="base" label="Orders" onclick={navigateToOrders}></lightning-button>
 
                 <div class="slds-button-group">
-                    <template if:true={isLoggedIn}>
-                        <lightning-button-stateful variant="base" label={userInitials} onclick={handleLogout}></lightning-button-stateful>
-                    </template>
-                    <template if:false={isLoggedIn}>
-                        <lightning-button-stateful variant="brand" label="Login" onclick={navigateToLogin}></lightning-button-stateful>
-                    </template>
+                    <!-- No need for login or user-specific buttons for guests -->
+                    <lightning-button variant="brand" label="Login" onclick={navigateToLogin}></lightning-button>
+                    <lightning-button variant="neutral" label="Register" onclick={navigateToRegister}></lightning-button>
                 </div>
             </div>
         </div>
@@ -25,34 +19,32 @@
         <div class="slds-p-horizontal_small">
             <lightning-carousel>
                 <lightning-carousel-image src={productImage1} 
-                header="Featured Product 1"
-                description="Camera"
-                alternative-text="Product Image 1"
-                href="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg"></lightning-carousel-image>
+                    header="Featured Product 1"
+                    description="Camera"
+                    alternative-text="Product Image 1"
+                    href="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg"></lightning-carousel-image>
                 <lightning-carousel-image src={productImage2}
-                header="Featured Product 2"
-                description="HeadPhone"
-                alternative-text="Product Image 2"
-                href="https://www.intex.in/cdn/shop/products/1_1545c94e-b9a0-439e-a95b-dcce076080bf_1024x1024.png"></lightning-carousel-image>
+                    header="Featured Product 2"
+                    description="HeadPhone"
+                    alternative-text="Product Image 2"
+                    href="https://www.intex.in/cdn/shop/products/1_1545c94e-b9a0-439e-a95b-dcce076080bf_1024x1024.png"></lightning-carousel-image>
             </lightning-carousel>
         </div>
         <lightning-button variant="brand" label="Shop Now" onclick={handleShopNowClick}></lightning-button>
 
-        <template if:true={products}>
+        <template if:true={filteredProducts.length}>
             <h2>Featured Products</h2>
             <ul class="product-list">
-                <template for:each={products} for:item="product">
+                <template for:each={filteredProducts} for:item="product">
                     <li key={product.id}>
                         <lightning-card title={product.name} icon-name="custom:custom63">
                             <p>{product.price}</p>
-
                             <lightning-button 
                                 variant="neutral" 
                                 label="Add to Cart" 
                                 onclick={handleAddToCart} 
                                 data-id={product.id}>
                             </lightning-button>
-
                             <lightning-button 
                                 variant="brand" 
                                 label="Buy Now" 
@@ -63,6 +55,10 @@
                     </li>
                 </template>
             </ul>
+        </template>
+
+        <template if:false={filteredProducts.length}>
+            <p>No products found matching your search.</p>
         </template>
     </lightning-card>
 </template>

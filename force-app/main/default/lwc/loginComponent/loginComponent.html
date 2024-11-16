@@ -4,9 +4,9 @@
             <lightning-input label="Username" value={username} onchange={handleInputChange} data-id="username"></lightning-input>
             <lightning-input label="Password" type="password" value={password} onchange={handleInputChange} data-id="password"></lightning-input>
             
-            <lightning-button-stateful variant="brand" label="Login" onclick={handleLogin}></lightning-button-stateful>
+            <lightning-button variant="brand" label="Login" onclick={handleLogin}></lightning-button>
             <br>
-            <lightning-button-stateful variant="neutral" label="Forgot Password?" onclick={handleForgotPassword}></lightning-button-stateful>
+            <lightning-button variant="neutral" label="Forgot Password?" onclick={handleForgotPassword}></lightning-button>
             
             <lightning-button variant="neutral" label="Don't have an account? Register here" onclick={handleRedirectToRegister}></lightning-button>
         </div>

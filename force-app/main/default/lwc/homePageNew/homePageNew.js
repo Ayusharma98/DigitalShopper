@@ -2,7 +2,6 @@ import { LightningElement, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import getProducts from '@salesforce/apex/HomePageController.getProducts';
 import getUserAccount from '@salesforce/apex/HomePageController.getUserAccount';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class HomePageNew extends NavigationMixin(LightningElement) {
     products = [];
@@ -61,61 +60,55 @@ export default class HomePageNew extends NavigationMixin(LightningElement) {
     }
 
     navigateToHome() {
-        this[NavigationMixin.Navigate]( {
+        this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: { url: '/homepage' }
         });
     }
 
     navigateToHomeAfterLogout() {
-        this[NavigationMixin.Navigate]( {
+        this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: { url: '/afterloginhomepage' }
         });
+        alert('Logout Successfully');
     }
 
-    logout() {
-        // Alert with user's name upon logout
-        if (this.userAccount) {
-            alert(`Logout successful, ${this.userAccount.firstName__c} ${this.userAccount.lastName__c}!`);
-        } else {
-            alert('Logout successful!');
-        }
 
-        // Redirect to homepage after logout
+    logout() {
         this.navigateToHomeAfterLogout();
     }
 
     navigateToAccount() {
-        this[NavigationMixin.Navigate]( {
+        this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: { url: '/account-details' }
         });
     }
 
     navigateToContacts() {
-        this[NavigationMixin.Navigate]( {
+        this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: { url: '/contacts' }
         });
     }
 
     navigateToProducts() {
-        this[NavigationMixin.Navigate]( {
+        this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: { url: '/product-details' }
         });
     }
 
     navigateToOrders() {
-        this[NavigationMixin.Navigate]( {
+        this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: { url: '/orders' }
         });
     }
 
     navigateToCart() {
-        this[NavigationMixin.Navigate]( {
+        this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: { url: '/shopping-cart' }
         });

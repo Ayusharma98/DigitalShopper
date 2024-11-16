@@ -7,35 +7,71 @@ export default class LoginComponent extends LightningElement {
     username = '';
     password = '';
     
+    // handleInputChange(event) {
+    //     const field = event.target.dataset.id;
+    //     this[field] = event.target.value;
+    // }
     handleInputChange(event) {
         const field = event.target.dataset.id;
-        this[field] = event.target.value;
+        if (field === 'Username') {
+            this.email = event.target.value;
+        } else if (field === 'password') {
+            this.password = event.target.value;
+        }
     }
 
+
+    // handleLogin() {
+    //    console.log(
+    //     loginUser({ username: this.username, password: this.password })
+    //         .then(result => {
+    //             if (result) {
+    //                 const initials = this.getUserInitials(this.username);
+    //                 this.dispatchLoginEvent(initials);
+
+    //                 this.dispatchEvent(new ShowToastEvent({
+    //                     title: 'Success',
+    //                     message: 'Login successful!',
+    //                     variant: 'success'
+    //                 }));
+                    
+    //                 this.redirectToHome();
+    //             } else {
+
+    //                 alert('Invalid credentials. Please try again.');
+    //             }
+    //         })
+    //         .catch(error => {
+    //             alert('Error: ' + error.body.message);
+    //         }));
+    // }
     handleLogin() {
-       console.log(
         loginUser({ username: this.username, password: this.password })
             .then(result => {
-                if (result) {
-                    const initials = this.getUserInitials(this.username);
-                    this.dispatchLoginEvent(initials);
-
-                    this.dispatchEvent(new ShowToastEvent({
-                        title: 'Success',
-                        message: 'Login successful!',
-                        variant: 'success'
-                    }));
-                    
-                    this.redirectToHome();
-                } else {
-
-                    alert('Invalid credentials. Please try again.');
-                }
+                if(result)
+                {
+                    console.log('Login successful', result);
+                    // const initials = this.getUserInitials(this.username);
+                    // this.dispatchLoginEvent(initials);
+                    // this.dispatchEvent(new ShowToastEvent({
+                    // title: 'Success',
+                    // message: 'Login Successfull',
+                    // variant: 'success'
+                    // }));
+                    this.navigateToHomePage();
+            }
+            else
+            {
+                alert('Invalid credentials. Please try again.');
+            }
             })
             .catch(error => {
-                alert('Error: ' + error.body.message);
-            }));
+                // Handle error
+                console.error('Error during login', error);
+                alert('Error during login', error);
+            });
     }
+
 
     getUserInitials(username) {
         const nameParts = username.split(' ');
